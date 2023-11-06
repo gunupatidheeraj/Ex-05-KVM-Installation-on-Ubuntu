@@ -1,11 +1,15 @@
 # Ex-05-KVM-Installation-on-Ubuntu
-## Aim:
-To implement CPU Virtualization KVM is installed in ubuntu 12.04 and higher Version.
-
-## Procedures:
+Aim:
+To implement CPU Virtualization KVM is installed in ubuntu 12.04 and higher Version
+Procedures:
 By default, Linux Operating system provides within the kernel virtualization capabilities i.e. Kernel Virtual Machine (kvm). Before enabling the kvm feature, you will first need to ensure that you meet the hardware and software requirements.
 
 Step 1: Verifying that CPU support virtualization
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/c26d2f93-1cac-47aa-88e1-fd92742562b4)
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/e1a9c793-dd68-40e0-93a4-6048c00fedf7)
+
 
 To check that your computer support virtualization, you can issuse one of the following commands :
 
@@ -14,11 +18,13 @@ egrep -c ‘(vmx |svm’) /proc/cpuinfo
 If this command returns the value 0, the cpu does not support hardware virtualization. If the command returns value 1 or greater, your cpu is capable of running virtualization software. The following screenshot shows the output of the
 
 
-
  
 Another way to check would be to use the command kvm-ok.
 I issue this (kvm -ok)command on my system as well and discovered that I was missing some packages (cpu checker). I had to install this package first in order to be able to run the kvm-ok command (see the screenshot below).
- 
+
+
+ ![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/5b969ebf-f882-4048-ab27-31aaa16e6385)
+
 
 Note :
 If you receive a message similar to “INFO: your cpu does not support KVM extensions, KVM acceleration can not be used”, you might still be able to run virtual machines but the performance will not be really good since you will not be using KVM extensions.
@@ -34,6 +40,8 @@ egrep -c ‘lm’ /proc/cpuinfo
 If the output is 0, you are not using a 64-bit CPU. If the Output is 1 or greater, you are running
 64-bit CPU and can proceed with the KVM installation
 
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/d810ad83-3208-4bfa-8d49-056f1b72433b)
+
 
 Note: For your information, you can have kvm installed on a 32-bit system but will be then able to run only 32-bit guests
 
@@ -43,6 +51,8 @@ Using the system monitor interface or system details in ubuntu 12.04 , you can e
 For the geek, you can also using the command line and digit the following command line (see screenshot)
 
 
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/5ae9c65a-4700-43ad-8a92-50d4b4e818df)
+
 If the output is something like x86_x64, you are running a 64-bit
  
 Installating KVM packages
@@ -50,6 +60,9 @@ If you reach this section, we assume that you meet the basic requirements in ord
 If you prefer to use the GUI,
 •	Launch the Ubuntu Software Center, and in the search box type qemu-kvm. Click on the package.The package is highlighted and you will see two buttons : more and Install. Click
 
+
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/e8003449-4e73-496a-9df7-83780d1d514f)
 
 on more button.
 
@@ -60,7 +73,10 @@ Scroll down and select the 2 additional Add-ons
 You are ready to install the package. Press the Install button (scroll up to see it)
 
 Check that the Bridge-utils package has been installed as well. From the ubuntu Software Center, type in the search box bridge-utils and you should see it already installed. If not, install it
- 
+
+
+ ![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/103ac796-6b9f-4637-8bd1-4eed15e45f6c)
+
  
 If you prefer to use the command line ( slightly faster), simply type the following command and wait for the installation to complete.
 
@@ -73,9 +89,12 @@ You can perform the same installation operation using the command line by issuin
 sudo apt-get install virt-manager
 After the installation complete, you can try to connect to the management interface (by typing in the Dash/activities search box virtual. the application icons will be displayed. Click on it.
  
- 
+ ![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/edb088c5-6e15-411c-849c-94f33dbca92b)
+
 
 The application will start but you will get immediately an error message. (see screenshot)
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/0d218e4c-0548-40ba-80e7-ccb06386d0e7)
 
 
 Actually, you need to create a new user on your system and to add this user to a specific group (called libvirtd). This will basically grant the right to use the Virt-manager interface. With Ubuntu 12.04, it simply easier to perform the group creation from the command line. By default, Ubuntu
@@ -88,27 +107,37 @@ You will need to logoff and login again in order to have the changes applied. Tr
 
 Creating your First virtual machine
 It’s time to create you first virtual machine on Ubuntu when using KVM as your preferred Hypervisor. At this stage, you have launched the Virtual Machine Manager and you should see a dialog box similar to this one
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/db74da4a-1559-4aca-af03-de8158857805)
+
 click on the highlighted computer icon and the New virtual machine wizard starts.
 
- 
+ ![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/8401cf06-6673-47b6-a834-14bab52414b0)
+
 Provide the information and Press Forward.
 In the following screen, select the installation source and the type of virtual machine that you want to install. Press Forward
 
 
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/c471bc07-9986-460a-8735-288ab98abd32)
+
+
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/14ed5ed6-a01a-4538-ba3f-86f05a6542f5)
 
 In the next screen, simply specify CPU and Memory information. Press Forward
  
 In the next screen, provide the information about the virtual disk to created and Press Forward
 
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/f493452b-c616-4647-b9f2-e01049544aca)
 
 
 
 In the final screen, provide the information about the Virtual networking and Press Finish
 
+![image](https://github.com/gunupatidheeraj/Ex-05-KVM-Installation-on-Ubuntu/assets/146909163/e0759d50-1e6d-446e-a4e3-3f2263ab1db1)
 
 
 At this stage, you will need to perform the installation of your operating system and you should be ready to go for the rest of your journey
 
-## Result:
+Result:
 Thus, the implementation to support CPU Virtualization KVM is installed in ubuntu
 successfully.
